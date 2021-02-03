@@ -1,1 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Giant's Causeway</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa5SVnenDgKBQtMdcK6S8L-WPlbkCDSL4&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+    <style type="text/css">
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
 
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 30px;
+		padding-top: 0px;
+      }
+	  header, footer {
+		text-align:center;
+	  }
+	  footer {padding: 10px}
+	  ul {
+		list-style: none}
+	a {text-decoration: none}
+	li{
+  margin: 10px 0;
+}
+    </style>
+    <script>
+      let map;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: 55.2376842, lng: -6.5184888 },
+          zoom: 15,
+        });
+      }
+	  
+    </script>
+  </head>
+  <body>
+	<header>
+		<h1>Giant's Causeway, co. Antrim, Ireland</h1>
+	</header>
+    <div id="map"></div>
+	<footer>
+		<ul>
+		<li><a href="https://maps.googleapis.com/maps/api/directions/json?origin=Belfast&destination=Giant&#39s+Causeway&key=AIzaSyCa5SVnenDgKBQtMdcK6S8L-WPlbkCDSL4" target="_blank"> 
+		Directions from Belfast </a>
+		<li><a href="https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJtfB1TDQpYEgR2rFQ1QsT_q8&fields=name,rating,opening_hours/open_now,user_ratings_total&key=AIzaSyCa5SVnenDgKBQtMdcK6S8L-WPlbkCDSL4" target="_blank"> 
+		Site Information and Reviews </a>
+		</ul>
+	</footer>
+  </body>
+</html>
