@@ -1,1 +1,43 @@
-
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Last Degree</title>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa5SVnenDgKBQtMdcK6S8L-WPlbkCDSL4&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+    <style type="text/css">
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;
+        /* The height is 400 pixels */
+        width: 100%;
+        /* The width is the width of the web page */
+      }
+	  h3 {text-align: center}
+    </style>
+    <script>
+      // Initialize and add the map
+      function initMap() {
+        // The location of University of Reading
+        const reading = { lat: 51.4414205, lng: -0.9418157 };
+        // The map, centered at University of Reading
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 8,
+          center: reading,
+        });
+        // The marker, positioned at University of Reading
+        const marker = new google.maps.Marker({
+          position: reading,
+          map: map,
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <h3>MSc Environmental Archaeology</h3>
+	<h3>University of Reading, UK</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+  </body>
+</html>
