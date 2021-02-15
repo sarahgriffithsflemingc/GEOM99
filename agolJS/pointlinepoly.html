@@ -37,8 +37,10 @@
     zoom: 13,
     container: "viewDiv"
  });
-const graphicsLayer = new GraphicsLayer();
+
+ const graphicsLayer = new GraphicsLayer();
  map.add(graphicsLayer);
+
  const point = { //Create a point
     type: "point",
     longitude: -118.80657463861,
@@ -52,12 +54,14 @@ const graphicsLayer = new GraphicsLayer();
         width: 1
     }
  };
+
  const pointGraphic = new Graphic({
     geometry: point,
     symbol: simpleMarkerSymbol
  });
  graphicsLayer.add(pointGraphic);
-  // Create a line geometry
+
+    // Create a line geometry
  const polyline = {
     type: "polyline",
     paths: [
@@ -71,11 +75,13 @@ const graphicsLayer = new GraphicsLayer();
     color: [226, 119, 40], // Orange
     width: 2
  };
+
  const polylineGraphic = new Graphic({
     geometry: polyline,
     symbol: simpleLineSymbol
  });
  graphicsLayer.add(polylineGraphic);
+
  // Create a polygon geometry
  const polygon = {
     type: "polygon",
@@ -96,14 +102,7 @@ const graphicsLayer = new GraphicsLayer();
         width: 1
     }
  };
- const polygonGraphic = new Graphic({
-    geometry: polygon,
-    symbol: simpleFillSymbol,
-	attributes: attributes,
-    popupTemplate: popupTemplate
 
- });
- graphicsLayer.add(polygonGraphic);
  const popupTemplate = {
     title: "{Name}",
     content: "{Description}"
@@ -112,7 +111,17 @@ const graphicsLayer = new GraphicsLayer();
     Name: "Graphic",
     Description: "I am a polygon"
  }
- 
+
+ const polygonGraphic = new Graphic({
+    geometry: polygon,
+    symbol: simpleFillSymbol,
+
+    attributes: attributes,
+    popupTemplate: popupTemplate
+
+ });
+ graphicsLayer.add(polygonGraphic);
+
  });
 </script>
 </head>
