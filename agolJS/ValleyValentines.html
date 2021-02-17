@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Valentine's in the Valley</title>
+  <style>
+  html, body, #viewDiv {
+  padding: 0;
+  margin: auto;
+  height: 90%;
+  width: 90%;}
+
+  .title {text-align: center;
+  color:#ED4D8E}
+  
+  #viewDiv {border: solid 4px #931B4C;}
+  </style>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/light/main.css">
+  <script src="https://js.arcgis.com/4.18/"></script>
+
+  <script>
+
+  require([
+    "esri/config",
+    "esri/Map",
+    "esri/views/MapView",
+    "esri/tasks/Locator",
+    "esri/Graphic"
+    ], function(esriConfig,Map, MapView, Locator, Graphic) {
+
+
+    esriConfig.apiKey = "AAPK1acb2c0aca254d899b513d2774a2ad7bLA85UxHnxkAJe1_m_pn1PNIAeQWAJHVyyFDesg3vn51GXRLbCexZnSsuy43QM7iJ";
+
+    const map = new Map({
+      basemap: "arcgis-streets"
+    });
+
+    const view = new MapView({
+      container: "viewDiv",
+      map: map,
+      center: [-64.3612848,45.0679411], //Longitude, latitude
+      zoom: 9
+    });
+
+    const places = ["Choose a date idea...", "Winery", "Parks and Outdoors", "Bakery", "Coffee shop", "Food", "Hotel"];
+
+    const select = document.createElement("select","");
+      select.setAttribute("class", "esri-widget esri-select");
+      select.setAttribute("style", "width: 175px; font-family: 'Avenir Next W00'; font-size: 1em; color: #ED4D8E");
+
+    places.forEach(function(p){
+      const option = document.createElement("option");
+      option.value = p;
+      option.innerHTML = p;
+      select.appendChild(option);
+    });
+
+    view.ui.add(select, "top-right");
+
+   const locator = new Locator({
+        url: "http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"
+    });
+
+   // Find places and add them to the map
+   function findPlaces(category, pt) {
+    locator.addressToLocations({
+      location: pt,
+      categories: [category],
+      maxLocations: 25,
+      outFields: ["Place_addr", "PlaceName"]
+    })
+
+    .then(function(results) {
+      view.popup.close();
+      view.graphics.removeAll();
+
+      results.forEach(function(result){
+        view.graphics.add(
+          new Graphic({
+            attributes: result.attributes,  // Data attributes returned
+            geometry: result.location, // Point returned
+            symbol: {
+  type: "picture-marker",  // autocasts as new PictureMarkerSymbol()
+  url: "https://i.postimg.cc/Gh579Q03/heart.png",
+  width: "45px",
+  height: "45px"
+            },
+
+            popupTemplate: {
+              title: "{PlaceName}", // Data attribute names
+              content: "{Place_addr}"
+            }
+         }));
+      });
+
+    });
+
+  }
+
+  // Search for places in center of map
+  view.watch("stationary", function(val) {
+    if (val) {
+       findPlaces(select.value, view.center);
+    }
+    });
+
+  // Listen for category changes and find places
+  select.addEventListener('change', function (event) {
+    findPlaces(event.target.value, view.center);
+  });
+
+});
+  </script>
+
+  </head>
+  <body>
+  <div class="title">
+  <h1> Valentine's in the Valley </h1>
+  <h3> Romantic Destinations Await in Annapolis Valley, Nova Scotia </h3>
+  </div>
+    <div id="viewDiv"></div>
+  </body>
+</html>
