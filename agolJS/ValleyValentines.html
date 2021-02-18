@@ -12,11 +12,11 @@
   width: 90%;}
 
   .title {text-align: center;
-  color:#ED4D8E}
+  color:#D28F79}
   
   #viewDiv {border: solid 4px #931B4C;}
   </style>
-  <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/light/main.css">
+  <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/light-red/main.css">
   <script src="https://js.arcgis.com/4.18/"></script>
 
   <script>
@@ -43,11 +43,11 @@
       zoom: 9
     });
 
-    const places = ["Choose a date idea...", "Winery", "Parks and Outdoors", "Bakery", "Coffee shop", "Food", "Hotel"];
+    const places = ["Choose a date idea...", "Winery", "Bakery", "Coffee shop", "Food", "Hotel", "Historical Monument", "Park"];
 
     const select = document.createElement("select","");
       select.setAttribute("class", "esri-widget esri-select");
-      select.setAttribute("style", "width: 175px; font-family: 'Avenir Next W00'; font-size: 1em; color: #ED4D8E");
+      select.setAttribute("style", "width: 175px; font-family: 'Avenir Next W00'; font-size: 1em; color: #FFFFFF");
 
     places.forEach(function(p){
       const option = document.createElement("option");
@@ -82,7 +82,7 @@
             geometry: result.location, // Point returned
             symbol: {
   type: "picture-marker",  // autocasts as new PictureMarkerSymbol()
-  url: "https://i.postimg.cc/Gh579Q03/heart.png",
+  url: "https://i.postimg.cc/4yZTcZgC/heart.png",
   width: "45px",
   height: "45px"
             },
