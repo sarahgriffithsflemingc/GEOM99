@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Canada's Provinces and Territories</title>
+<style>
+html, body, #viewDiv {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+	width: 100%;
+	font-family:Arial;}
+	#viewDiv {width:50%}
+.text {float:right; 
+	width: 50%;}
+.map {float:left;
+	width:80%}
+  h1 {color:#FD7666;
+	border-bottom-style: solid;
+	border-bottom-width: thick;
+	font-size:55px;
+	text-align: center;
+	margin-top:5px}
+h2,p {text-align: justify;
+margin:30px;
+color:#FD7666}
+h2 {padding-top:10px}
+.last {padding-bottom:15px}
+.facts{background-color:#F9F8F8;
+margin:20px}
+
+
+</style>
+<link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/light/main.css">
+<script src="https://js.arcgis.com/4.18/"></script>
+
+<script>
+  require([
+    "esri/config",
+    "esri/Map",
+    "esri/views/MapView",
+    "esri/layers/FeatureLayer"
+  ], function(esriConfig,Map, MapView, FeatureLayer) {
+  esriConfig.apiKey = "AAPK1acb2c0aca254d899b513d2774a2ad7bLA85UxHnxkAJe1_m_pn1PNIAeQWAJHVyyFDesg3vn51GXRLbCexZnSsuy43QM7iJ";
+  const map = new Map({
+    basemap: "arcgis-light-gray"
+  });
+  const view = new MapView({
+    container: "viewDiv",
+    map: map,
+    center: [-94.9628695,68.4985352],
+    zoom: 2
+  });
+ // Display Pop Ups for Canada Layer
+    const popupInfo = {
+      "title": "What province or territory is this?",
+     "content": "<b>English Name:</b> {PRENAME}<br><b>French Name:</b> {PRFNAME}"
+    }
+// Display Canada Map (polygons)
+  const canadaLayer = new FeatureLayer({
+    url: "https://luna.flemingcollege.ca/arcgis/rest/services/Geom99lab2/sarahgriCanada/MapServer/0",
+	outFields: ["PRENAME","PRFNAME"],
+    popupTemplate: popupInfo
+  });
+  map.add(canadaLayer, 0);
+  });
+</script>
+
+</head>
+<body>
+<div class="map" id="viewDiv"></div>
+<div class="text">
+<h1> Canada </h1>
+<div class="facts">
+<h2> Country facts </h2>
+<p> Canada is the second largest country in the world. It touches three oceans. If you click and hold, you can move the map in the window. Can you find the three ocean names?</p>
+<p> Canada has 10 provinces and 3 territories. You can see them on the map. Each one is a different colour. You can zoom in and out on the map if the mouse is over it. Try clicking on one of the provinces or territories. What do you see? </p>
+<p> Canada is bilingual which means two languages are spoken. Those languages are English and French. You can see each province or territory name in English and in French in the pop up that appears when you click on the map. </p>
+<p> Ottawa is the capitol of Canada. Ottawa is in Ontario. Can you find the province of Ontario? Where is the province or territory you live in? </p>
+<p class="last"> Baffin Island is the largest island in Canada. The island is part of Nunavut. Can you locate Nunavut? </p>
+</div>
+</div>
+</body>
+</html>
